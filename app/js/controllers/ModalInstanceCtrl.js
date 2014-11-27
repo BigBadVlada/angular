@@ -1,12 +1,7 @@
-sitesApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+sitesApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
-
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
+    $scope.save = function () {
+        $modalInstance.close();
     };
 
     $scope.cancel = function () {

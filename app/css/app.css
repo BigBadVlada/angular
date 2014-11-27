@@ -2,6 +2,8 @@
     display: none !important;
 }
 
+button:focus {outline:0 !important;}
+
 #buttons {
     border-radius: 5%;
     margin-top: 10px;
@@ -22,4 +24,3 @@
     margin: 10px 0 0 0;
 }
 
-button:focus {outline:0 !important;}
