@@ -19,10 +19,35 @@
                     <h3 class="modal-title">Add site</h3>
                 </div>
                 <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" ng-click="save()">Save</button>
-                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    <form name="addSitesForm" role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="siteurl">Site URL</label>
+                                <input ng-model="sites.url" required type="url" class="form-control" id="siteurl" placeholder="Enter site URL" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="sitecolor">Site color</label>
+                                <div class="controls">
+                                    <select ng-model="sites.color" required class="form-control" id="sitecolor">
+                                        <option value="">- None -</option>
+                                        <option value="red">Red</option>
+                                        <option value="green">Green</option>
+                                        <option value="blue">Blue</option>
+                                        <option value="cyan">Cyan</option>
+                                        <option value="magenta">Magenta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="group">Groups</label>
+                                <input ng-model="sites.groups" ng-repeat="name in groups.name" id="group" type="text"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="save()">Save</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </script>
             <button class="addbtn btn btn-lg btn-warning" ng-click="open()">Add site</button>
@@ -34,10 +59,31 @@
                     <h3 class="modal-title">Add Group</h3>
                 </div>
                 <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" ng-click="save()">Save</button>
-                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    <form name="addGroupForm" role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="groupname">Group Name</label>
+                                <input ng-model="group.name" required type="text" class="form-control" id="groupname" placeholder="Enter group name" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="groupcolor">Group color</label>
+                                <div class="controls">
+                                    <select ng-model="group.color" required class="form-control" id="groupcolor">
+                                        <option value="">- None -</option>
+                                        <option value="red">Red</option>
+                                        <option value="green">Green</option>
+                                        <option value="blue">Blue</option>
+                                        <option value="cyan">Cyan</option>
+                                        <option value="magenta">Magenta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="save()">Save</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </script>
             <button class="addbtn btn btn-lg btn-warning" ng-click="open()">Add Group</button>
