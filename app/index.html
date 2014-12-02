@@ -1,100 +1,109 @@
 <!DOCTYPE html>
-<html ng-app="sitesApp">
-
+<html data-ng-app="sitesApp">
 <head lang="en">
     <meta charset="UTF-8" />
     <title>Devana Application</title>
-    <link data-require="bootstrap-css@*" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <!--CSS links-->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css" />
 </head>
-
 <body>
-<div class="container ng-cloak">
+<div class="container ng-cloak" data-ng-controller="SiteController">
     <div class="col-lg-3 text-center" id="buttons">
-        <div ng-controller="SiteController">
-            <div data-ng-repeat="group in vm.groups" data-ng-if="vm.groups.length > 0">
-                <h4>Groups</h4>
-                <p>{{group.name}} - {{group.color}}</p>
+        <!--Add group and Add site buttons-->
+        <button class="addbtn btn btn-lg btn-warning" data-ng-click="addGroup()">Add Group</button>
+        <button class="addbtn btn btn-lg btn-warning" data-ng-click="addSite()">Add site</button>
+        <!--Add group modal-->
+        <script type="text/ng-template" id="add-group-template">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Group</h3>
             </div>
-
-            <div data-ng-repeat="site in vm.sites" data-ng-if="vm.sites.length > 0">
-                <h4>Sites</h4>
-                <p>{{site.url}} - {{site.color}} - {{site.group}}</p>
-            </div>
-
-            <button class="addbtn btn btn-lg btn-warning" ng-click="addGroup()">Add Group</button>
-            <button class="addbtn btn btn-lg btn-warning" ng-click="addSite()">Add site</button>
-
-            <script type="text/ng-template" id="add-group-template">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add Group</h3>
-                </div>
-                <div class="modal-body">
-                    <form name="addGroupForm" role="form">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="groupname">Group Name</label>
-                                <input ng-model="model.name" required type="text" class="form-control" id="groupname" placeholder="Enter group name" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="groupcolor">Group color</label>
-                                <div class="controls">
-                                    <select ng-model="model.color" data-ng-options="color.value as color.name for color in colors" required class="form-control" id="groupcolor">
-                                        <option value="">- Select a color -</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="saveGroup(model)">Save</button>
-                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </script>
-            <script type="text/ng-template" id="add-site-template">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add site</h3>
-                </div>
-                <div class="modal-body">
-                    <form name="addSitesForm" role="form">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="siteurl">Site URL</label>
-                                <input ng-model="model.url" required type="url" class="form-control" id="siteurl" placeholder="Enter site URL" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="sitecolor">Site color</label>
-                                <div class="controls">
-                                    <select ng-model="model.color" data-ng-options="color.value as color.name for color in colors" required class="form-control" id="sitecolor">
-                                        <option value="">- Select a color -</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="group">Groups</label>
-                                <select ng-model="model.group" data-ng-options="group.name for group in groups" required class="form-control" id="sitecolor">
-                                    <option value="">- Select a Group -</option>
+            <div class="modal-body">
+                <form name="addGroupForm" role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="groupname">Group Name</label>
+                            <input data-ng-model="model.name" required type="text" class="form-control" id="groupname" placeholder="Enter group name" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="groupcolor">Group color</label>
+                            <div class="controls">
+                                <select data-ng-model="model.color" data-ng-options="color.value as color.name for color in colors" required class="form-control" id="groupcolor">
+                                    <option value="">- Select a color -</option>
                                 </select>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="saveSite(model)">Save</button>
-                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-ng-disabled="addGroupForm.$invalid" data-ng-click="saveGroup(model, addGroupForm)">Save</button>
+                            <button class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </script>
+        <!--Add site modal-->
+        <script type="text/ng-template" id="add-site-template">
+            <div class="modal-header">
+                <h3 class="modal-title">Add site</h3>
+            </div>
+            <div class="modal-body">
+                <form name="addSitesForm" role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="siteurl">Site URL</label>
+                            <input data-ng-model="model.url" required type="url" class="form-control" id="siteurl" placeholder="Enter site URL" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="sitecolor">Site color</label>
+                            <div class="controls">
+                                <select data-ng-model="model.color" data-ng-options="color.value as color.name for color in colors" required class="form-control" id="sitecolor">
+                                    <option value="">- Select a color -</option>
+                                </select>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </script>
-
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="group">Groups</label><br/>
+                            <label class="checkboxes-br" data-ng-repeat="group in groups">
+                                <input type="checkbox" id="group" data-ng-model="model.groups[group.name]">{{group.name}}
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-ng-disabled="addSitesForm.$invalid" data-ng-click="saveSite(model, addSitesForm)">Save</button>
+                            <button class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </script>
+    </div>
+    <!-- Groups are displayed here-->
+    <div class="col-lg-3" id="groups">
+        <div data-ng-repeat="group in vm.groups" data-ng-if="vm.groups.length > 0">
+            <p class="well well-sm" data-ng-style="{color: group.color}">{{group.name}}</p>
         </div>
-
+        <div class="text-center">
+            <div class="btn" data-ng-click="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add Group</div>
+        </div>
+    </div>
+    <!-- Sites are displayed here -->
+    <div class="col-lg-4" id="sites">
+        <div class="text-center" data-ng-if="vm.sites.length <= 0">
+            <div class="well well-sm">
+                <strong class="text">You have no websites.</strong>
+                <div class="btn btn-success" data-ng-click="addSite()"><span class="glyphicon glyphicon-plus"></span> Add one now!</div>
+            </div>
+        </div>
+        <div data-ng-repeat="site in vm.sites" data-ng-if="vm.sites.length > 0">
+            <p class="well well-sm" data-ng-style="{color: site.color}">{{site.url}}</p>
+        </div>
     </div>
 </div>
 
-
+<!--Script files-->
 <script src="lib/angular/angular.js"></script>
 <script src="lib/ui-bootstrap-tpls-0.12.0.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers/SiteController.js"></script>
+
 </body>
 </html>

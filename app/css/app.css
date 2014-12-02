@@ -12,15 +12,30 @@ button:focus {outline:0 !important;}
 }
 
 #groups {
-
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 #sites {
-
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 .addbtn {
     width: 180px;
     margin: 10px 0 0 0;
+}
+
+.text {
+    color: gray;
+}
+
+.checkboxes-br {
+    display: block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
 }
 

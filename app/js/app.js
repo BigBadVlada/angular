@@ -1,1 +1,1 @@
-var sitesApp = angular.module('sitesApp', ['ui.bootstrap']);var sitesApp = angular.module('sitesApp', ['ui.bootstrap']);
+var sitesApp = angular.module('sitesApp', ['ui.bootstrap']);

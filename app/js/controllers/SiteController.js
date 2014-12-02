@@ -40,22 +40,23 @@ sitesApp.controller('SiteController', function($scope, $modal) {
         });
     };
 
-    $scope.saveSite = function(site) {
-        console.log(site);
-        $scope.vm.sites.push(site)
-        $scope.modalInstance.close();
-    }
+    $scope.saveSite = function(site, addSitesForm) {
+       if(addSitesForm.$valid) {
+           console.log(site);
+           $scope.vm.sites.push(site)
+           $scope.modalInstance.close();
+       }
+    };
 
-    $scope.saveGroup = function(group) {
-        console.log(group);
-        $scope.vm.groups.push(group);
-        $scope.modalInstance.close();
-    }
+    $scope.saveGroup = function(group, addGroupForm) {
+        if(addGroupForm.$valid) {
+            console.log(group);
+            $scope.vm.groups.push(group);
+            $scope.modalInstance.close();
+        }
+    };
 
     $scope.cancel = function() {
         $scope.modalInstance.close();
     }
-
-
-
 });
