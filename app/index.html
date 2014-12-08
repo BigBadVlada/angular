@@ -97,6 +97,23 @@
             <p class="well well-sm" data-ng-style="{color: site.color}">{{site.url}}</p>
         </div>
     </div>
+    <!-- JSON structure toggle buttons -->
+    <div class="row container">
+        <div id="jsonoutput" class="col-md-12">
+            <div class="col-md-6 text-center">
+                <button class="btn btn-primary" data-ng-disabled="vm.groups < 1" data-ng-click="isCollapsedGroups = !isCollapsedGroups">Groups JSON output</button>
+                <div collapse="isCollapsedGroups" data-ng-repeat="group in vm.groups">
+                    <div class="well well-lg">{{group}}<br/></div>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <button class="btn btn-primary" data-ng-disabled="vm.sites < 1"data-ng-click="isCollapsedSites = !isCollapsedSites">Sites JSON output</button>
+                <div collapse="isCollapsedSites" data-ng-repeat="site in vm.sites">
+                    <div class="well well-lg">{{site}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--Script files-->

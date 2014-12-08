@@ -1,5 +1,6 @@
 sitesApp.controller('SiteController', function($scope, $modal) {
 
+    //Scope creation
     $scope.vm = {};
     $scope.vm.sites = [];
     $scope.vm.groups = [];
@@ -21,8 +22,14 @@ sitesApp.controller('SiteController', function($scope, $modal) {
         value: 'magenta'
     }];
 
+    //JSON toggle buttons
+    $scope.isCollapsedGroups = true;
+    $scope.isCollapsedSites = true;
+
+    //Sites functions
     $scope.addSite = function() {
         $scope.model = {};
+        $scope.model.id = 1;
         $scope.groups = $scope.vm.groups;
         $scope.colors = $scope.vm.colors;
         $scope.modalInstance = $modal.open({
@@ -31,21 +38,23 @@ sitesApp.controller('SiteController', function($scope, $modal) {
         });
     };
 
+    $scope.saveSite = function(site, addSitesForm) {
+        if(addSitesForm.$valid) {
+            console.log(site);
+            $scope.vm.sites.push(site);
+            $scope.modalInstance.close();
+        }
+    };
+
+    //Groups functions
     $scope.addGroup = function() {
         $scope.model = {};
+        $scope.model.id = 1;
         $scope.colors = $scope.vm.colors;
         $scope.modalInstance = $modal.open({
             templateUrl: 'add-group-template',
             scope: $scope
         });
-    };
-
-    $scope.saveSite = function(site, addSitesForm) {
-       if(addSitesForm.$valid) {
-           console.log(site);
-           $scope.vm.sites.push(site)
-           $scope.modalInstance.close();
-       }
     };
 
     $scope.saveGroup = function(group, addGroupForm) {
@@ -56,6 +65,7 @@ sitesApp.controller('SiteController', function($scope, $modal) {
         }
     };
 
+    //Close modal
     $scope.cancel = function() {
         $scope.modalInstance.close();
     }
