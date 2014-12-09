@@ -29,7 +29,7 @@ sitesApp.controller('SiteController', function($scope, $modal) {
     //Sites functions
     $scope.addSite = function() {
         $scope.model = {};
-        $scope.model.id = 1;
+        $scope.model.id = $scope.vm.sites.length+1;
         $scope.groups = $scope.vm.groups;
         $scope.colors = $scope.vm.colors;
         $scope.modalInstance = $modal.open({
@@ -46,10 +46,14 @@ sitesApp.controller('SiteController', function($scope, $modal) {
         }
     };
 
+    $scope.deleteSite = function(index){
+        $scope.vm.sites.splice(index,1);
+    };
+
     //Groups functions
     $scope.addGroup = function() {
         $scope.model = {};
-        $scope.model.id = 1;
+        $scope.model.id = $scope.vm.groups.length+1;
         $scope.colors = $scope.vm.colors;
         $scope.modalInstance = $modal.open({
             templateUrl: 'add-group-template',
@@ -63,6 +67,10 @@ sitesApp.controller('SiteController', function($scope, $modal) {
             $scope.vm.groups.push(group);
             $scope.modalInstance.close();
         }
+    };
+
+    $scope.deleteGroup = function(index){
+        $scope.vm.groups.splice(index,1);
     };
 
     //Close modal

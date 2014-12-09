@@ -79,7 +79,7 @@
     <!-- Groups are displayed here-->
     <div class="col-lg-3" id="groups">
         <div data-ng-repeat="group in vm.groups" data-ng-if="vm.groups.length > 0">
-            <p class="well well-sm" data-ng-style="{color: group.color}">{{group.name}}</p>
+            <p class="well well-sm" data-ng-style="{color: group.color}">{{group.name}} <button class="btn">Edit</button> <button class="btn" data-ng-click="deleteGroup($index)">Delete</button></p>
         </div>
         <div class="text-center">
             <div class="btn" data-ng-click="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add Group</div>
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div data-ng-repeat="site in vm.sites" data-ng-if="vm.sites.length > 0">
-            <p class="well well-sm" data-ng-style="{color: site.color}">{{site.url}}</p>
+            <p class="well well-sm" data-ng-style="{color: site.color}">{{site.url}} <button class="btn" data-ng-click="editSite()">Edit</button> <button class="btn" data-ng-click="deleteSite($index)">Delete</button></p>
         </div>
     </div>
     <!-- JSON structure toggle buttons -->
@@ -103,13 +103,13 @@
             <div class="col-md-6 text-center">
                 <button class="btn btn-primary" data-ng-disabled="vm.groups < 1" data-ng-click="isCollapsedGroups = !isCollapsedGroups">Groups JSON output</button>
                 <div collapse="isCollapsedGroups" data-ng-repeat="group in vm.groups">
-                    <div class="well well-lg">{{group}}<br/></div>
+                    <div class="well well-lg">{{group | json}}<br/></div>
                 </div>
             </div>
             <div class="col-md-6 text-center">
                 <button class="btn btn-primary" data-ng-disabled="vm.sites < 1"data-ng-click="isCollapsedSites = !isCollapsedSites">Sites JSON output</button>
                 <div collapse="isCollapsedSites" data-ng-repeat="site in vm.sites">
-                    <div class="well well-lg">{{site}}</div>
+                    <div class="well well-lg">{{site | json}}</div>
                 </div>
             </div>
         </div>
